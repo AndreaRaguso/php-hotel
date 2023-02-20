@@ -42,8 +42,17 @@ $hotels = [
 ];
 
 
-$parking = $_GET['parking'];
-$stars = $_GET['stars'];
+    if(isset($_GET['parking'])){
+        $parking = $_GET['parking'];
+    }
+    else if (isset($_GET['stars'])) {
+        $stars = $_GET['stars'];
+    }
+    else{
+        $normal = true;
+    }
+    
+    
 
 
 ?>
@@ -79,7 +88,7 @@ $stars = $_GET['stars'];
                     <li>
                         <span class="dropdown-item p-0 fw-bold">Parcheggio</span>
                         <input type="radio" id="parking" class="ms-2 mt-2" name="parking" value="true">
-                        <label for="parking" class="fs-5">Presente</label><br>
+                        <label for="parking" class="fs-5" >Presente</label><br>
                         <input type="radio" id="parking" class="ms-2" name="parking" value="false">
                         <label for="parking" class="fs-5">Assente</label><br>
                     </li>
@@ -118,7 +127,7 @@ $stars = $_GET['stars'];
                             </label>
                         </div>
                     </li>
-                </ul>
+                </ul>   
             </div>
 
             <button class="border-1 border border-dark rounded py-1 px-4 fs-5">
@@ -133,16 +142,17 @@ $stars = $_GET['stars'];
 
             <?php
             foreach ($hotels as $key => $hotel) {
-                echo '<div class="col-auto card mx-auto mb-3 hotel-card py-4">';
-                echo '<h2 class="text-center mb-4"> Hotel numero ' . $key + 1 . '</h2>';
-                echo '<ul>';
-                echo '<li><strong>Nome: </strong>' . $hotel['name'] . '</li>';
-                echo '<li><strong>Descrizione: </strong>' . $hotel['description'] . '</li>';
-                echo '<li><strong>Parcheggio: </strong>' . ($hotel['parking'] ? 'Presente' : 'Assente')  . '</li>';
-                echo '<li><strong>Voto: </strong>' . $hotel['vote'] . ' stelle</li>';
-                echo '<li><strong>Distanza dal centro : </strong>' . $hotel['distance_to_center'] . ' metri</li>';
-                echo '</ul>';
-                echo '</div>';
+                if($hotel['vote'] == $stars){
+                    echo '<div class="col-auto card mx-auto mb-3 hotel-card py-4">';
+                    echo '<h2 class="text-center mb-4"> ' . $hotel['name'] . '</h2>';
+                    echo '<ul>';
+                    echo '<li><strong>Descrizione: </strong>' . $hotel['description'] . '</li>';
+                    echo '<li><strong>Parcheggio: </strong>' . ($hotel['parking'] ? 'Presente' : 'Assente')  . '</li>';
+                    echo '<li><strong>Voto: </strong>' . $hotel['vote'] . ' stelle</li>';
+                    echo '<li><strong>Distanza dal centro : </strong>' . $hotel['distance_to_center'] . ' metri</li>';
+                    echo '</ul>';
+                    echo '</div>';
+                }
             }
 
             echo $parking;
