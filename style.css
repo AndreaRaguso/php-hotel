@@ -1,0 +1,19 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hotel-card{
+    width: calc(50% - 20px);
+}
+
+.hotel-card ul {
+    list-style: none;
+}
+
+
+.hotel-card ul li{
+   font-size: 20px;
+}
+
